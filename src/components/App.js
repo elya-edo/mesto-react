@@ -9,24 +9,25 @@ function App() {
 
   //Для попапа редактирования профиля. Хук, управляющий внутренним состоянием.
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
+  // Для попапа добавления карточки. Хук, управляющий внутренним состоянием.
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
+  // Для попапа изменения аватала. Хук, управляющий внутренним состоянием.
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
+  // Для попапа отрытия картинки. Хук, управляющий внутренним состоянием.
+  const [selectedCard, setSelectedCard] = React.useState({});
+
   function handleEditProfileClick() {
     setEditProfilePopupOpen(true);
   }
   
-  // Для попапа добавления карточки. Хук, управляющий внутренним состоянием.
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   function handleAddPlaceClick() {
     setAddPlacePopupOpen(true);
   }
   
-  // Для попапа изменения аватала. Хук, управляющий внутренним состоянием.
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
   }
 
-  // Для попапа отрытия картинки. Хук, управляющий внутренним состоянием.
-  const [selectedCard, setSelectedCard] = React.useState(false);
   function handleCardClick(card) {
     setSelectedCard(card);
   }
@@ -36,7 +37,7 @@ function App() {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setEditAvatarPopupOpen(false);
-    setSelectedCard(false);
+    setSelectedCard({});
   }
 
   return (
