@@ -18,7 +18,7 @@ export function Main(props) {
             onClick={props.onEditProfile}
             type="button"
             aria-label="Редактировать профиль"
-          ></button>
+          />
           <p className="profile__description">{currentUser.about}</p>
         </div>
         <button
@@ -26,7 +26,7 @@ export function Main(props) {
           onClick={props.onAddPlace}
           type="button"
           aria-label="Добавить"
-        ></button>
+        />
       </section>
 
       <section className="elements">

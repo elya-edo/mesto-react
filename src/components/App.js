@@ -25,6 +25,7 @@ function App() {
   const [currentUser, setСurrentUser] = React.useState({name: '', about: ''});
   // cтейт массива карточек
   const [cards, setCards] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
   
   // эффект при монтировании, который вызывает загрузку данных пользователя с сервера и обновляет стейт-переменную из полученного значения.
   React.useEffect(() => {
@@ -73,6 +74,7 @@ function App() {
   
   // зарос к api на изменение данных профиля
   function handleUpdateUser({name, about}) {
+    setIsLoading(true);
     api.sendUserInfo(name, about)
       .then(json => {
         setСurrentUser(json);
@@ -80,11 +82,15 @@ function App() {
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
    // зарос к api на изменение аватара
   function handleUpdateAvatar({linkAvatar}) {
+    setIsLoading(true);
     api.changeAvatar(linkAvatar)
       .then(json => {
         setСurrentUser(json);
@@ -92,6 +98,9 @@ function App() {
       })
       .catch(err => {
         console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -135,6 +144,7 @@ function App() {
 
   // добавление карточки. запрос к api
   function handleAddPlaceSubmit({nameImage, linkImage}) {
+    setIsLoading(true);
     api.sendNewCard(nameImage, linkImage)
     .then((newCard) => {
       setCards([newCard, ...cards]);
@@ -142,6 +152,9 @@ function App() {
     })
     .catch(err => {
       console.error(err);
+    })
+    .finally(() => {
+      setIsLoading(false);
     });
   }
 
@@ -154,7 +167,6 @@ function App() {
         <Main
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
-          и
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
           onCardLike={handleCardLike}
@@ -164,11 +176,11 @@ function App() {
 
         <Footer />
 
-        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} /> 
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} isLoading={isLoading} /> 
 
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} /> 
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} isLoading={isLoading} /> 
 
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} isLoading={isLoading} />
 
         <PopupWithForm name="warning" title="Вы уверены?" buttonText="Да" />
 

@@ -34,7 +34,7 @@ export function Card(props) {
             className={cardLikeButtonClassName}
             type="button"
             aria-label="Поставить лайк"
-          ></button>
+          />
           <p className="elements__like-quantity">{props.card.likes.length}</p>
         </div>
       </div>

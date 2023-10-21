@@ -6,7 +6,7 @@ export function ImagePopup(props) {
         <div className="popup__container popup__container_image">
           <img className="popup__picture" src={props.card.link} alt={props.card.name} />
           <h2 className="popup__picture-title"></h2>
-          <button className="popup__close-button" onClick={props.onClose} type="button" aria-label="Закрыть"></button>
+          <button className="popup__close-button" onClick={props.onClose} type="button" aria-label="Закрыть"/>
         </div>
       </div>
   );
